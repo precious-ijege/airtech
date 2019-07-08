@@ -4,10 +4,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+isort = "*"
+flake8 = "*"
+black = "*"
+autopep8 = "*"
 
 [packages]
 django = "*"
 djangorestframework = "*"
+pycodestyle = "*"
+django-money = "*"
 
 [requires]
 python_version = "3.6"
