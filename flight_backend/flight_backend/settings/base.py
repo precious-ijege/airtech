@@ -25,6 +25,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'api.User'
+
 
 # Application definition
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'djmoney',
 ]
 
 MIDDLEWARE = [
