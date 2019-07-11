@@ -57,7 +57,6 @@ class Ticket(models.Model):
     ticket_class = models.CharField(max_length=10, choices=constants.CLASS)
     phone_number = models.CharField(max_length=50)
     passport_number = models.CharField(max_length=50)
-    contact_address = models.CharField(max_length=255)
     status = models.CharField(choices=constants.STATUS, max_length=50, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
