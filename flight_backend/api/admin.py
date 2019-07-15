@@ -65,6 +65,10 @@ class UserAdmin(BaseUserAdmin):
 
 # Register your models here.
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Aircraft,)
+admin.site.register(models.Location,)
+admin.site.register(models.Flight,)
+admin.site.register(models.Ticket)
 
 # Remove Group Model from Admin.
 admin.site.unregister(Group,)
