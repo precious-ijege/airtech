@@ -1,1 +1,1 @@
-from .users import UsersViewSet
+from .users import UserSignUpViewSet  # noqa: F401
