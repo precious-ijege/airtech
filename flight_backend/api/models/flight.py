@@ -30,16 +30,29 @@ class Flight(models.Model):
     """
     This model defines a Flight object
     """
-    flight_number = models.CharField(_('Enter flight number'), max_length=50, blank=True, unique=True)
-    departure_date = models.DateField(_(u"Departure Date"), blank=True, null=True)
-    arrival_date = models.DateField(_(u"Arrival Date"), blank=True, null=True)
-    departure = models.ForeignKey("Location", on_delete=models.SET_NULL, null=True, related_name='departure')
-    destination = models.ForeignKey("Location", on_delete=models.SET_NULL, null=True, related_name='destination')
+
+    flight_number = models.CharField(
+        _("Enter flight number"), max_length=50, blank=True, unique=True
+    )
+    departure_date = models.DateField(_("Departure Date"), blank=True, null=True)
+    arrival_date = models.DateField(_("Arrival Date"), blank=True, null=True)
+    departure = models.ForeignKey(
+        "Location", on_delete=models.SET_NULL, null=True, related_name="departure"
+    )
+    destination = models.ForeignKey(
+        "Location", on_delete=models.SET_NULL, null=True, related_name="destination"
+    )
     flight_duration = models.DurationField(blank=True)
-    economy_price = MoneyField(max_digits=14, decimal_places=2, default_currency='USD', null=True, blank=True)
-    business_price = MoneyField(max_digits=14, decimal_places=2, default_currency='USD', null=True, blank=True)
+    economy_price = MoneyField(
+        max_digits=14, decimal_places=2, default_currency="USD", null=True, blank=True
+    )
+    business_price = MoneyField(
+        max_digits=14, decimal_places=2, default_currency="USD", null=True, blank=True
+    )
     aircraft = models.ForeignKey("Aircraft", on_delete=models.SET_NULL, null=True)
-    status = models.CharField(max_length=50, choices=constants.FLIGHT_STATUS, default=constants.AVAILABLE)
+    status = models.CharField(
+        max_length=50, choices=constants.FLIGHT_STATUS, default=constants.AVAILABLE
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -51,13 +64,16 @@ class Ticket(models.Model):
     """
     Model defines a Ticket object
     """
+
     user = models.ForeignKey("User", on_delete=models.CASCADE)
     flight = models.ForeignKey("Flight", on_delete=models.CASCADE)
     ticket_id = models.CharField(max_length=50, blank=True)
     ticket_class = models.CharField(max_length=10, choices=constants.CLASS)
     phone_number = models.CharField(max_length=50)
     passport_number = models.CharField(max_length=50)
-    status = models.CharField(choices=constants.STATUS, max_length=50, blank=True, null=True)
+    status = models.CharField(
+        choices=constants.STATUS, max_length=50, blank=True, null=True
+    )
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

@@ -19,27 +19,9 @@ class UserAdmin(BaseUserAdmin):
         "updated_at",
     )
     fieldsets = (
-        ("Details", {"fields": ("email", "password",)}),
-        (
-            "Personal info",
-            {
-                "fields": (
-                    "first_name",
-                    "last_name",
-                    "phone_number",
-                )
-            }
-        ),
-        (
-            "Permissions",
-            {
-                "fields": (
-                    "is_active",
-                    "is_staff",
-                    "is_superuser",
-                )
-            }
-        ),
+        ("Details", {"fields": ("email", "password")}),
+        ("Personal info", {"fields": ("first_name", "last_name", "phone_number")}),
+        ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser")}),
     )
     add_fieldsets = (
         (
@@ -54,7 +36,7 @@ class UserAdmin(BaseUserAdmin):
                     "is_staff",
                     "is_superuser",
                     "password",
-                    "password2"
+                    "password2",
                 ),
             },
         ),
@@ -65,10 +47,10 @@ class UserAdmin(BaseUserAdmin):
 
 # Register your models here.
 admin.site.register(models.User, UserAdmin)
-admin.site.register(models.Aircraft,)
-admin.site.register(models.Location,)
-admin.site.register(models.Flight,)
+admin.site.register(models.Aircraft)
+admin.site.register(models.Location)
+admin.site.register(models.Flight)
 admin.site.register(models.Ticket)
 
 # Remove Group Model from Admin.
-admin.site.unregister(Group,)
+admin.site.unregister(Group)
