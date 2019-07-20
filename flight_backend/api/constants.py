@@ -24,7 +24,7 @@ FLIGHT_STATUS = (
     (LANDED, "Landed"),
 )
 
-EMAIL_REGEX = ("^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"  # noqa: W605
+EMAIL_REGEX = "^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"  # noqa: W605
 EMAIL_MESSAGE = "Please enter a valid email address"
 PASSWORD_REGEX = (
     "^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)(?=.*[@#$%*^&+=]+.*)[0-9a-zA-Z@#$%*^&+=]{8,}$"
