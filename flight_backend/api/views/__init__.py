@@ -1,1 +1,1 @@
-from .users import UserSignUpViewSet  # noqa: F401
+from .users import UserSignUpViewSet, UserLoginViewSet  # noqa: F401
