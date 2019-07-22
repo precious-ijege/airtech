@@ -26,6 +26,7 @@ class UserLogInTest(APITestCase):
             data=json.dumps(self.login_details),
             content_type="application/json",
         )
+        self.assertIn("token", response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["email"], "ghost@gmail.com")
 
@@ -34,7 +35,9 @@ class UserLogInTest(APITestCase):
         response = client.post(
             self.url, data=json.dumps(login_details), content_type="application/json"
         )
-        self.assertEqual(response.data["message"], "User does not exist")
+        self.assertEqual(
+            response.data["message"], "Login not successful, check email and password."
+        )
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_login_with_invalid_details(self):

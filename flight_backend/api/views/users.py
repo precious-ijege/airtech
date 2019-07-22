@@ -60,14 +60,9 @@ class UserLoginViewSet(generics.CreateAPIView):
                 )
             })
             if token_serializer.is_valid():
-                response = {
-                    'token': token_serializer.data.get('token'),
-                    'id': serializer.data.get('id'),
-                    'first_name': serializer.data.get('first_name'),
-                    'last_name': serializer.data.get('last_name'),
-                    'email': serializer.data.get('email')
-                }
+                response = serializer.data
+                response.update({'token': token_serializer.data.get('token')})
                 return Response(response, status=status.HTTP_200_OK)
         return Response(
-            dict(message="User does not exist"),
+            dict(message="Login not successful, check email and password."),
             status=status.HTTP_401_UNAUTHORIZED)
