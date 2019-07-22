@@ -46,3 +46,9 @@ class TokenSerializer(serializers.Serializer):
     """
 
     token = serializers.CharField(max_length=255)
+
+
+class UserLoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ('id', 'first_name', 'last_name', 'email')
