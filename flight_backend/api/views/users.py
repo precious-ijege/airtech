@@ -2,10 +2,14 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework_jwt.settings import api_settings
 from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
+from django.shortcuts import get_object_or_404
 
-from api.models import get_user
-from ..helpers import validate_email, validate_password, validate_login_details
+from api.models import get_user, User
+from api.helpers import validate_email, validate_password, validate_login_details
+from api.permissions import IsOwner
 from api.serializers import UserSerializer, TokenSerializer, UserLoginSerializer
 
 
@@ -66,3 +70,22 @@ class UserLoginViewSet(generics.CreateAPIView):
         return Response(
             dict(message="Login not successful, check email and password."),
             status=status.HTTP_401_UNAUTHORIZED)
+
+
+class UpdateUserViewSet(APIView):
+    permission_classes = (IsAuthenticated, IsOwner)
+
+    def put(self, request, pk):
+        user = get_object_or_404(User.objects.all(), pk=pk)
+        self.check_object_permissions(request, user)
+        serializer = UserSerializer(instance=user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                dict(message="{} has been updated successfully".format(serializer.data.get("first_name"))),
+                status=status.HTTP_200_OK
+            )
+        return Response(
+            dict(message="User not updated"),
+            status=status.HTTP_400_BAD_REQUEST
+        )
