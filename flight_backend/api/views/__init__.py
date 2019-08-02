@@ -1,1 +1,6 @@
-from .users import UserSignUpViewSet, UserLoginViewSet, UpdateUserViewSet  # noqa: F401
+from .users import (  # noqa: F401
+    UserSignUpViewSet,
+    UserLoginViewSet,
+    UpdateUserViewSet,
+    PhotoUploadViewSet,
+)
