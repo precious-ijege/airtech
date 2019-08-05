@@ -1,1 +1,6 @@
-from .users import UserSerializer, TokenSerializer, UserLoginSerializer  # noqa: F401
+from .users import (  # noqa: F401
+    UserSerializer,
+    TokenSerializer,
+    UserLoginSerializer,
+    ImageUploadSerializer,
+)

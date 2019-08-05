@@ -6,11 +6,17 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from django.shortcuts import get_object_or_404
+from rest_framework.exceptions import ValidationError
 
 from api.models import get_user, User
 from api.helpers import validate_email, validate_password, validate_login_details
 from api.permissions import IsOwner
-from api.serializers import UserSerializer, TokenSerializer, UserLoginSerializer
+from api.serializers import (
+    UserSerializer,
+    TokenSerializer,
+    UserLoginSerializer,
+    ImageUploadSerializer,
+)
 
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -58,18 +64,21 @@ class UserLoginViewSet(generics.CreateAPIView):
         authenticated_user = validate_login_details(request.data)
         if authenticated_user:
             serializer = UserLoginSerializer(authenticated_user)
-            token_serializer = TokenSerializer(data={
-                "token": jwt_encode_handler(
-                    jwt_payload_handler(get_user(serializer.data.get('id')))
-                )
-            })
+            token_serializer = TokenSerializer(
+                data={
+                    "token": jwt_encode_handler(
+                        jwt_payload_handler(get_user(serializer.data.get("id")))
+                    )
+                }
+            )
             if token_serializer.is_valid():
                 response = serializer.data
-                response.update({'token': token_serializer.data.get('token')})
+                response.update({"token": token_serializer.data.get("token")})
                 return Response(response, status=status.HTTP_200_OK)
         return Response(
             dict(message="Login not successful, check email and password."),
-            status=status.HTTP_401_UNAUTHORIZED)
+            status=status.HTTP_401_UNAUTHORIZED,
+        )
 
 
 class UpdateUserViewSet(APIView):
@@ -82,10 +91,61 @@ class UpdateUserViewSet(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                dict(message="{} has been updated successfully".format(serializer.data.get("first_name"))),
-                status=status.HTTP_200_OK
+                dict(
+                    message="{} has been updated successfully".format(
+                        serializer.data.get("first_name")
+                    )
+                ),
+                status=status.HTTP_200_OK,
             )
         return Response(
-            dict(message="User not updated"),
-            status=status.HTTP_400_BAD_REQUEST
+            dict(message="User not updated"), status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+class PhotoUploadViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        if user.profile_photo:
+            serializer = ImageUploadSerializer(user)
+            return Response(
+                data={
+                    "message": "Successful",
+                    "photo URL": serializer.data.get("profile_photo"),
+                },
+                status=status.HTTP_200_OK,
+            )
+        else:
+            raise ValidationError("User does not have a Photo")
+
+    def post(self, request):
+        photo = request.FILES.get("image", None)
+        if photo:
+            user = request.user
+            photo.name = "user_{}_{}".format(user.id, photo.name)
+            user.profile_photo = photo
+            user.save()
+            serializer = ImageUploadSerializer(user)
+            return Response(
+                data={
+                    "message": "Successful Upload",
+                    "photo URL": serializer.data.get("profile_photo"),
+                },
+                status=status.HTTP_201_CREATED,
+            )
+        else:
+            raise ValidationError("Photo not supplied")
+
+    def delete(self, request):
+        user = request.user
+        if user.profile_photo:
+            user.profile_photo.delete(save=True)
+            return Response(
+                data={"message": "Photo deleted successfully"},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        return Response(
+            data={"message": "User does not have a Photo"}, status=status.HTTP_200_OK
         )

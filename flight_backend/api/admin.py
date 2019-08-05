@@ -33,6 +33,7 @@ class UserAdmin(BaseUserAdmin):
                     "first_name",
                     "last_name",
                     "phone_number",
+                    "profile_photo",
                     "is_staff",
                     "is_superuser",
                     "password",

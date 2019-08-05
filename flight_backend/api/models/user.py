@@ -57,6 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     phone_number = models.CharField(max_length=50, blank=True, null=True)
     contact_address = models.CharField(max_length=255, blank=True, null=True)
+    profile_photo = models.ImageField(upload_to="profile_photos/", blank=True, null=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

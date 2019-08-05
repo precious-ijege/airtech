@@ -43,8 +43,12 @@ class UserSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get("first_name", instance.first_name)
         instance.last_name = validated_data.get("last_name", instance.last_name)
         instance.email = validated_data.get("email", instance.email)
-        instance.phone_number = validated_data.get("phone_number", instance.phone_number)
-        instance.contact_address = validated_data.get("contact_address", instance.contact_address)
+        instance.phone_number = validated_data.get(
+            "phone_number", instance.phone_number
+        )
+        instance.contact_address = validated_data.get(
+            "contact_address", instance.contact_address
+        )
         if validated_data.get("password"):
             instance.set_password(validated_data.get("password"))
 
@@ -63,4 +67,14 @@ class TokenSerializer(serializers.Serializer):
 class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
-        fields = ('id', 'first_name', 'last_name', 'email')
+        fields = ("id", "first_name", "last_name", "email")
+
+
+class ImageUploadSerializer(serializers.ModelSerializer):
+    """
+    Handles file/image upload by a user
+    """
+
+    class Meta:
+        model = models.User
+        fields = ("id", "profile_photo")
