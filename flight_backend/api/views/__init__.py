@@ -4,3 +4,5 @@ from .users import (  # noqa: F401
     UpdateUserViewSet,
     PhotoUploadViewSet,
 )
+
+from .flight import LocationViewSet, AircraftViewSet, FlightViewSet

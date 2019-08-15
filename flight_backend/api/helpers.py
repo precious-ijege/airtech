@@ -1,10 +1,11 @@
 import re
+
 from rest_framework import serializers, exceptions
 from django.contrib.auth import authenticate
 
 from .constants import PASSWORD_MESSAGE, PASSWORD_REGEX, EMAIL_REGEX, EMAIL_MESSAGE
 
-from .models import User
+from .models import User, Location, Aircraft
 
 
 def validate_password(password):

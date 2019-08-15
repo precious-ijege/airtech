@@ -4,3 +4,5 @@ from .users import (  # noqa: F401
     UserLoginSerializer,
     ImageUploadSerializer,
 )
+
+from .flight import LocationSerializer, AircraftSerializer, FlightSerializer  # noqa: F401
