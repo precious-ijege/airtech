@@ -5,4 +5,9 @@ from .users import (  # noqa: F401
     ImageUploadSerializer,
 )
 
-from .flight import LocationSerializer, AircraftSerializer, FlightSerializer  # noqa: F401
+from .flight import (  # noqa: F401
+    LocationSerializer,
+    AircraftSerializer,
+    FlightSerializer,
+    TicketSerializer,
+)
