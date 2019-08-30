@@ -3,9 +3,15 @@ import re
 from rest_framework import serializers, exceptions
 from django.contrib.auth import authenticate
 
-from .constants import PASSWORD_MESSAGE, PASSWORD_REGEX, EMAIL_REGEX, EMAIL_MESSAGE
+from .constants import (
+    PASSWORD_MESSAGE,
+    PASSWORD_REGEX,
+    EMAIL_REGEX,
+    EMAIL_MESSAGE,
+    STATUSES,
+)
 
-from .models import User, Location, Aircraft
+from .models import User
 
 
 def validate_password(password):
@@ -30,11 +36,42 @@ def validate_email(email):
 
 
 def validate_login_details(login_details):
-    email = login_details.get('email')
-    password = login_details.get('password')
+    email = login_details.get("email")
+    password = login_details.get("password")
     if email and password:
         user = authenticate(email=email, password=password)
         return user
-    raise exceptions.ValidationError(
-        "You must enter an email and a password to login"
-    )
+    raise exceptions.ValidationError("You must enter an email and a password to login")
+
+
+def validate_flight_details(flight_details):
+    if not flight_details.get("flight_number"):
+        raise exceptions.ValidationError("Flight must have a flight number")
+    elif flight_details.get("departure_date") > flight_details.get("arrival_date"):
+        raise exceptions.ValidationError("Departure date cannot be after Arrival date")
+    elif not (
+        flight_details.get("economy_price") and flight_details.get("business_price")
+    ):
+        raise exceptions.ValidationError(
+            "Please include both economy and business Prices"
+        )
+    elif flight_details.get("status") not in STATUSES:
+        raise exceptions.ValidationError(
+            "Flight status must be either AVAILABLE, DEPARTED, DELAYED, CANCELLED, LANDED, or ARRIVED"
+        )
+    elif flight_details.get("economy_price_currency") != flight_details.get(
+        "business_price_currency"
+    ):
+        raise exceptions.ValidationError(
+            "Currency type for business and economy price must be the same"
+        )
+    elif not (
+        flight_details.get("destination")
+        and flight_details.get("departure")
+        and flight_details.get("aircraft")
+    ):
+        raise exceptions.ValidationError(
+            "Provide valid keys for destination, departure and aircraft"
+        )
+    else:
+        return flight_details

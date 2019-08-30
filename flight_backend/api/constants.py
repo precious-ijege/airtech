@@ -1,12 +1,12 @@
 BOOKED = "BOOKED"
 RESERVED = "RESERVED"
-YES = "Yes"
-NO = "No"
+YES = "YES"
+NO = "NO"
 
 STATUS = ((BOOKED, "Booked"), (RESERVED, "Reserved"))
 
-ECONOMY = "economy"
-BUSINESS = "business"
+ECONOMY = "ECONOMY"
+BUSINESS = "BUSINESS"
 CLASS = ((ECONOMY, "Economy"), (BUSINESS, "Business"))
 AVAILABLE = "AVAILABLE"
 DELAYED = "DELAYED"
@@ -23,6 +23,8 @@ FLIGHT_STATUS = (
     (DEPARTED, "Departed"),
     (LANDED, "Landed"),
 )
+
+STATUSES = (AVAILABLE, DEPARTED, DELAYED, CANCELLED, LANDED, ARRIVED)
 
 EMAIL_REGEX = "^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"  # noqa: W605
 EMAIL_MESSAGE = "Please enter a valid email address"
