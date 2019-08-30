@@ -94,10 +94,3 @@ class TicketSerializer(serializers.ModelSerializer):
         ticket = models.Ticket.objects.create(**validated_data)
 
         return ticket
-
-    def update(self, instance, validated_data):
-        print("did i get into update")
-        import pdb
-
-        pdb.set_trace()
-        pass
