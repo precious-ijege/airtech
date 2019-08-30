@@ -10,6 +10,8 @@ from .views import (
     LocationViewSet,
     AircraftViewSet,
     FlightViewSet,
+    TicketViewSet,
+    index,
 )
 
 router = SimpleRouter()
@@ -17,8 +19,10 @@ router = SimpleRouter()
 router.register("location", LocationViewSet, "location")
 router.register("aircraft", AircraftViewSet, "aircraft")
 router.register("flight", FlightViewSet, "flight")
+router.register("ticket", TicketViewSet, "ticket")
 
 urlpatterns = [
+    path("", index, name="home"),
     path("users/sign-up/", UserSignUpViewSet.as_view(), name="sign-up"),
     path("users/log-in/", UserLoginViewSet.as_view(), name="log-in"),
     path(
