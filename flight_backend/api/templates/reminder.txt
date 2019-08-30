@@ -1,0 +1,10 @@
+Hello {{ name }},
+
+This is a reminder that your booked flight with number {{ flight_number }},and ticket number {{ ticket_number }}
+bound for {{ destination }} from {{ departure }}, will be departing tomorrow {{ departure_date }}.
+Please ensure you arrive on time for your flight.
+
+Thank you for choosing AIRTECH
+
+Regards!
+Flight Team..

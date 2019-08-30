@@ -1,0 +1,30 @@
+Hello {{ name }},
+
+
+Thank you for flying airtech.
+This email contains the details of your reserved ticket. You can find the information below:
+
+
+
+TICKET SUMMARY
+
+Ticket Number: {{ ticket_number }}
+
+Flight Number: {{ flight_number }}
+
+From: {{ departure }}
+
+To: {{ destination }}
+
+Departure Date:{ { departure_date }}
+
+Passport Number: {{ passport_number }}
+
+Ticket Class: {{ ticket_class }}
+
+NOTE: You are expected to make full payments of your reservation in the next 24hrs or risk forfeit.
+
+
+
+Regards!
+Flight Team..

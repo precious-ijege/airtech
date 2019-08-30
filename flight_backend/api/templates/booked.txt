@@ -1,0 +1,27 @@
+Hello {{ name }},
+
+
+Thank you for flying airtech.
+This email contains the details of your ticket. You can find the information below:
+
+
+
+TICKET SUMMARY
+
+Ticket Number: {{ ticket_number }}
+
+Flight Number: {{ flight_number }}
+
+From: {{ departure }}
+
+To: {{ destination }}
+
+Departure Date: {{ departure_date }}
+
+Passport Number: {{ passport_number }}
+
+Ticket Class: {{ ticket_class }}
+
+
+Regards!
+Flight Team..
