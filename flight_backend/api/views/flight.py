@@ -66,19 +66,8 @@ class FlightViewSet(ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        flight = get_object_or_404(Flight.objects.all(), pk=kwargs.get("pk"))
-        serializer = FlightSerializer(instance=flight, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(
-                dict(
-                    message="flight has been updated successfully", data=serializer.data
-                ),
-                status=status.HTTP_200_OK,
-            )
-        return Response(
-            dict(message="Flight not updated"), status=status.HTTP_400_BAD_REQUEST
-        )
+        kwargs["partial"] = True
+        return super(FlightViewSet, self).update(request, *args, **kwargs)
 
     @action(detail=False, methods=["get"])
     def status(self, request):

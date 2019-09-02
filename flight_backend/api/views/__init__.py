@@ -6,4 +6,9 @@ from .users import (  # noqa: F401
     index,
 )
 
-from .flight import LocationViewSet, AircraftViewSet, FlightViewSet, TicketViewSet  # noqa: F401
+from .flight import (  # noqa: F401
+    LocationViewSet,
+    AircraftViewSet,
+    FlightViewSet,
+    TicketViewSet,
+)
