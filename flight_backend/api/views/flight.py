@@ -54,9 +54,6 @@ class FlightViewSet(ModelViewSet):
 
         return [permission() for permission in permission_classes]
 
-    def perform_create(self, serializer):
-        serializer.save()
-
     def create(self, request, *args, **kwargs):
         validate_flight_details(request.data)
         serializer = FlightSerializer(data=request.data)
@@ -102,9 +99,6 @@ class TicketViewSet(ModelViewSet):
     serializer_class = TicketSerializer
     permission_classes = (IsAuthenticated,)
     http_method_names = ["post"]
-
-    def perform_create(self, serializer):
-        serializer.save()
 
     def create(self, request, *args, **kwargs):
         flight = get_object_or_404(Flight.objects.all(), pk=request.data.get("flight"))
