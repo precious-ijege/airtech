@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import ValidationError
+from rest_framework.decorators import api_view, permission_classes
 
 from api.models import get_user, User
 from api.helpers import validate_email, validate_password, validate_login_details
@@ -21,6 +22,14 @@ from api.serializers import (
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+
+@api_view(["GET"])
+@permission_classes((AllowAny,))
+def index(request, *args, **kwargs):
+    return Response(
+        data={"message": "Welcome to AIRTECH flight system."}, status=status.HTTP_200_OK
+    )
 
 
 class UserSignUpViewSet(generics.CreateAPIView):

@@ -69,13 +69,17 @@ class Ticket(models.Model):
     flight = models.ForeignKey("Flight", on_delete=models.CASCADE)
     ticket_id = models.CharField(max_length=50, blank=True)
     ticket_class = models.CharField(max_length=10, choices=constants.CLASS)
-    phone_number = models.CharField(max_length=50)
     passport_number = models.CharField(max_length=50)
     status = models.CharField(
         choices=constants.STATUS, max_length=50, blank=True, null=True
     )
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if len(self.ticket_id.strip(" ")) == 0:
+            self.ticket_id = self.id_generator()
+        super(Ticket, self).save(*args, **kwargs)
 
     def __str__(self):
         return "{}".format(self.ticket_id)
