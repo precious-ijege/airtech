@@ -64,7 +64,9 @@ def send_flight_reminder():
     current_date = date.today()
     tickets = Ticket.objects.filter(status=BOOKED)
     for ticket in tickets:
-        if (ticket.flight.departure_date - current_date).days <= 1:
+        if ((ticket.flight.departure_date - current_date).days >= 0) and (
+            (ticket.flight.departure_date - current_date).days <= 1
+        ):
             subject = "Reminder For Departure of Flight"
             sender = settings.EMAIL_HOST_USER
             recipient_list = [ticket.user.email]
