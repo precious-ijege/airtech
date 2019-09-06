@@ -9,7 +9,7 @@ install:
   - pip install coveralls
 
 before script:
-  - cd flight_backend
+  - cd ./flight_backend
 
 script:
   - coverage run manage.py test
