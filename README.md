@@ -1,4 +1,6 @@
 # airtech
+[![Build Status](https://travis-ci.org/precious-ijege/airtech.svg?branch=develop)](https://travis-ci.org/precious-ijege/airtech)
+[![Coverage Status](https://coveralls.io/repos/github/precious-ijege/airtech/badge.svg?branch=develop)](https://coveralls.io/github/precious-ijege/airtech?branch=develop)
 ## Description
 This repository contains the API enpoints for a Flight management system. The system enables authenticated and authorized users book flight tickets, purchase flight tickets and also make flight resevations. The system is built using the Django rest framework.
 

@@ -6,8 +6,11 @@ python:
 install:
   - pipenv install
 
+before script:
+  - cd flight_backend
+
 script:
-  - coverage run ./manage.py test
+  - coverage run manage.py test
   - coverage report
 
 after_script:
