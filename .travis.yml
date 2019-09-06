@@ -5,6 +5,8 @@ python:
 
 install:
   - pipenv install
+  - pip install coverage
+  - pip install coveralls
 
 before script:
   - cd flight_backend
