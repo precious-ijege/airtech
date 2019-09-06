@@ -3,13 +3,13 @@ language: python
 python:
   - "3.6"
 
+before install:
+  - cd ./flight_backend
+
 install:
   - pipenv install
   - pip install coverage
   - pip install coveralls
-
-before script:
-  - cd ./flight_backend
 
 script:
   - coverage run manage.py test
