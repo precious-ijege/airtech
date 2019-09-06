@@ -7,7 +7,7 @@ service:
   - postgresql
 
 addons:
-  postgresql: '10.10'
+  postgresql: '9.4'
 
 install:
   - pipenv install
