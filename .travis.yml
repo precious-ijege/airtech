@@ -3,6 +3,9 @@ language: python
 python:
   - "3.6"
 
+service:
+  - postgresql
+
 install:
   - pipenv install
   - pipenv install coverage
@@ -10,6 +13,10 @@ install:
 
 before_script:
   - cd flight_backend
+  - export DB_NAME="airtech_backend_test"
+  - psql -c 'create database airtech_backend_test;' -U postgres
+  - python manage.py makemigrations
+  - python manage.py migrate
 
 script:
   - coverage run manage.py test
