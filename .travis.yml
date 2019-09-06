@@ -6,6 +6,9 @@ python:
 service:
   - postgresql
 
+addons:
+  postgresql: '10.10'
+
 install:
   - pipenv install
   - pipenv install coverage
