@@ -7,6 +7,7 @@ install:
   - pipenv install
 
 script:
+  - cd flight_backend
   - python manage.py test
 
 after_script:
