@@ -16,7 +16,7 @@ From: {{ departure }}
 
 To: {{ destination }}
 
-Departure Date:{ { departure_date }}
+Departure Date:{{ departure_date }}
 
 Passport Number: {{ passport_number }}
 
