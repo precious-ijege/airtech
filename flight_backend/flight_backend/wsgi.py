@@ -11,7 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-if os.environ["ENV"] in ["PRODUCTION"]:
+if os.environ["ENV"] == "PRODUCTION":
     setting = "flight_backend.settings.prod"
 else:
     setting = "flight_backend.settings.dev"

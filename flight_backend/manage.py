@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    if os.environ["ENV"] in ["PRODUCTION"]:
+    if os.environ["ENV"] == "PRODUCTION":
         setting = "flight_backend.settings.prod"
     else:
         setting = "flight_backend.settings.dev"
