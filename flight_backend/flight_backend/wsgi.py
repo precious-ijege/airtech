@@ -11,11 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-if os.environ["ENV"] == "PRODUCTION":
-    setting = "flight_backend.settings.prod"
-else:
-    setting = "flight_backend.settings.dev"
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", setting)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "flight_backend.settings")
 
 application = get_wsgi_application()

@@ -4,13 +4,8 @@ import os
 import sys
 
 
-if os.environ["ENV"] == "PRODUCTION":
-    setting = "flight_backend.settings.prod"
-else:
-    setting = "flight_backend.settings.dev"
-
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", setting)
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "flight_backend.settings.dev")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
