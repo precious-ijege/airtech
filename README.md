@@ -24,7 +24,7 @@ The system supports:
 - User authentication
 
 ### API Documentation
-Follow this [link](http://) to view the full api documentation.
+Not available ATM.
 
 ## Technologies
 **airtech** makes use of a host of modern technologies. The core ones are:
