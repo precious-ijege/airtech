@@ -12,7 +12,7 @@ coverage = "==4.5.4"
 coveralls = "==1.8.2"
 
 [packages]
-django = "==2.2.3"
+django = "==2.2.20"
 djangorestframework = "==3.9.4"
 django-money = "==0.15"
 pycodestyle = "==2.5.0"
